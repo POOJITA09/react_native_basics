@@ -7,14 +7,23 @@ import {
   Alert,
   Dimensions,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
 const { width } = Dimensions.get("screen");
-const TodoInputForm = () => {
-  const [text, onChangeText] = React.useState("");
+
+const TodoInputForm = ({ addTodoHandler }) => {
+  const [text, onChangeText] = useState("");
+
   const addTodosHandler = () => {
     Keyboard.dismiss();
-    Alert.alert("Done");
+    addTodoHandler({
+      key: new Date().toISOString(),
+      item: text,
+    });
+    Alert.alert(
+      "Add New Todo",
+      `Todo Name : ${text}`
+    );
   };
   return (
     <View style={styles.container}>
