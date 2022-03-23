@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginHorizontal: 20,
     marginVertical: 10,
+    width: width-40,
   },
   btnContainer: {
     width: width / 2,
