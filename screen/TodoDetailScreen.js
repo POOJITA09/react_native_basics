@@ -4,7 +4,6 @@ import HeaderTop from "../components/HeaderTop";
 
 const TodoDetailScreen = ({ route, navigation }) => {
   const { key, item } = route.params;
-
   console.log(route.params);
   return (
     <>

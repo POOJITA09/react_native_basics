@@ -12,6 +12,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 const TodoList = ({ todosList }) => {
   const navigation = useNavigation();
+  
   const onClickHandler = (data) => {
     navigation.navigate("Detail", data);
   };
