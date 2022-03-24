@@ -1,18 +1,34 @@
-import { View, Text, ScrollView, FlatList, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 
 const TodoList = ({ todosList }) => {
+  const navigation = useNavigation();
+  
+  const onClickHandler = (data) => {
+    navigation.navigate("Detail", data);
+  };
+
   return (
     <FlatList
       contentContainerStyle={styles.container}
       keyExtractor={(item) => item.key.toString()}
       data={todosList}
       renderItem={({ item }) => (
-        <View style={styles.item}>
-          <Text style={styles.text}>{item.item}</Text>
-          <AntDesign name="checkcircle" size={24} color="#0074CC" />
-        </View>
+        <TouchableOpacity onPress={()=>onClickHandler(item)}>
+          <View style={styles.item}>
+            <Text style={styles.text}>{item.item}</Text>
+            <AntDesign name="checkcircle" size={24} color="#0074CC" />
+          </View>
+        </TouchableOpacity>
       )}
     />
   );
