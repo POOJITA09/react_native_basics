@@ -1,19 +1,19 @@
 import { StyleSheet, Text, View, Button } from "react-native";
 import React from "react";
-import TodoList from "../components/TodoList";
+import Completetodo from "../components/Completetodo";
 import HeaderTop from "../components/HeaderTop";
 import data from "../assets/data/todo-data";
 import COLORS from "../constants/COLORS";
 
-const TodosListScreen = ({ navigation }) => {
+const Completetodoscreen = ({ navigation }) => {
   return (
     <>
-      <HeaderTop title="TodosApp" color={COLORS.colorheader} />
-      <TodoList todosList={data} />
+      <HeaderTop title="Completetodo" color={COLORS.colorheader} />
+      <Completetodo todosList={data} />
     </>
   );
 };
 
-export default TodosListScreen;
+export default Completetodoscreen;
 
 const styles = StyleSheet.create({});
