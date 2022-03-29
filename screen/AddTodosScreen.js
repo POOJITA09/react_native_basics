@@ -5,6 +5,10 @@ import HeaderTop from "../components/HeaderTop";
 import COLORS from "../constants/COLORS";
 
 const AddTodosScreen = () => {
+  const addTodoHandler=(data)=>{
+    
+
+  }
   return (
   <>
     <HeaderTop title="ADD Form" color={COLORS.colorheader} />
