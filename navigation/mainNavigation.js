@@ -7,6 +7,8 @@ import TodosListScreen from "../screen/TodosListScreen";
 import TodoDetailScreen from "../screen/TodoDetailScreen";
 import { Feather } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Completetodoscreen from "../screen/Completetodoscreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,6 +26,7 @@ const TodoListStack = () => {
     >
       <Stack.Screen name="List" component={TodosListScreen} />
       <Stack.Screen name="Detail" component={TodoDetailScreen} />
+      
     </Stack.Navigator>
   );
 };
@@ -49,6 +52,15 @@ const TabBottomNav = () => {
           tabBarIcon: () => <Entypo name="add-to-list" size={24} color="black" />,
         }}
       />
+      <Tab.Screen
+        name="Completetodo"
+        component={Completetodoscreen}
+        options={{
+          tabBarIcon: () => <MaterialCommunityIcons name="playlist-check" size={24} color="black" />,
+          
+        }}
+      />
+
     </Tab.Navigator>
   );
 };
