@@ -20,7 +20,6 @@ export const todoListSlice = createSlice({
     addItem: (state, action) => {
       state.pendingList.push(action.payload);
     },
-    add,
   },
 });
 
