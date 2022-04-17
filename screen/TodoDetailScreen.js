@@ -5,11 +5,12 @@ import COLORS from '../constants/COLORS';
 import HeaderTop from "../components/HeaderTop";
 const { width } = Dimensions.get("screen");
 import { Ionicons } from '@expo/vector-icons';
-
-
+import {useDispatch} from 'react-redux';
+import { deleteItemAsync } from '../store/reducerAndAction';
+import { NavigationHelpersContext } from '@react-navigation/native';
 const TodoDetailScreen = ({navigation, route}) => {
   const item = route.params;
-  
+  const dispatch=useDispatch();
 
   return (
     <>
@@ -45,16 +46,12 @@ const TodoDetailScreen = ({navigation, route}) => {
           }}>
           <Text
             style={{fontSize: 25, fontWeight: 'bold', color: '#737373'}}>
-            {item.item}
+            {item.title}
           </Text>
           <Text style={style.date}>{item.deadline}</Text>         
         </View>
         <Text style={style.detailsText}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text
-          ever since the 1500s, when an unknown printer took a galley of type
-          and scrambled it to make a type specimen book. It has survived not
-          only five centuries.
+          {item.description}
         </Text>
       </View>
     </ScrollView>
@@ -64,7 +61,14 @@ const TodoDetailScreen = ({navigation, route}) => {
   <Pressable   style={style.btnContainer}>
           <Text style={style.btn}>Tick</Text>
        </Pressable>
-       <Pressable   style={style.btnContainer}>
+       <Pressable   style={style.btnContainer} onPress={()=>{
+         console.log("before",navigation)
+         dispatch(deleteItemAsync(item.key))
+         console.log("after",navigation)
+         //navigation.goBack()
+
+         navigation.navigate("List")
+       }}>
           <Text style={style.btn}>Delete</Text>
        </Pressable>
   </View>

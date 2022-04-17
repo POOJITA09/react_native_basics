@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View ,FlatList, TouchableOpacity} from 'react-native'
 import React from 'react'
+import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -7,6 +8,10 @@ import { Ionicons } from '@expo/vector-icons';
 import TodoList from './TodoList';
 
 const Completetodo = ({ todosList }) => {
+  const navigation = useNavigation();
+  const onClickHandler = (data) => {
+    navigation.navigate("Detail", data);
+  };
   return (
       <>
     

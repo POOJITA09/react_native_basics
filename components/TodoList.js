@@ -5,6 +5,7 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  Image
 } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -16,21 +17,24 @@ import Calendar from "./Calendar";
 import Card from "./Card";
 
 
-
-
-
 const TodoList = ({ todosList }) => {
   const navigation = useNavigation();
   
   const onClickHandler = (data) => {
     navigation.navigate("Detail", data);
   };
-
-  return (
-  
-    <>
-    <View style={styles.view}> 
-       <Calendar/>
+  let UI=null
+  if(todosList.length<=0){
+    console.log(todosList.length)
+    console.log("No task")
+    UI=<View>
+      <Image source={require("../assets/check.png")} style={styles.img} resizeMode={"contain"}/>
+      <Text style={styles.tasks}>No tasks yet!</Text>
+    </View>
+  }
+  else{
+    console.log(todosList.length)
+    UI=(<>
       <Card todosList={todosList}/>
     
     {/* <View style={styles.view}> */}
@@ -40,51 +44,31 @@ const TodoList = ({ todosList }) => {
     contentContainerStyle={styles.container}
     keyExtractor={(item) => item.key.toString()}
     data={todosList}
-    // ListHeaderComponent={() => {
-    //   return (<Text style={styles.txt}>InComplete</Text>)
-      
-    // }}
+    
     renderItem={({ item }) => (
       <TouchableOpacity onPress={()=>onClickHandler(item)}>
         <View style={styles.item}>
         <MaterialIcons name="radio-button-unchecked" size={20} color="#0074CC" />
-          <Text style={styles.text}>{item.item}</Text>
+          <Text style={styles.text}>{item.title}</Text>
           
           <View style={styles.buttongrp}>
           <Text style={styles.date}>{item.deadline}</Text>
-          
-         
+
           </View>
           </View>
         
       </TouchableOpacity>
     )}
   />
-  </View>
-    {/* <View style={styles.view}>
-    <Text style={styles.txt}> Complete </Text>
-  </View>
-  <FlatList
-    contentContainerStyle={styles.container}
-    keyExtractor={(item) => item.key.toString()}
-    data={todosList}
-    renderItem={({ item }) => (
-      <TouchableOpacity onPress={()=>onClickHandler(item)}>
-        <View style={styles.item}>
-        <View style={styles.buttongrp1}>
-        <AntDesign name="checkcircle" size={20} color="#0074CC" />
-        </View>
-          <Text style={styles.text}>{item.item}</Text>
-          <View style={styles.buttongrp}>
-          <Entypo name="circle-with-cross" size={24} color="black" />
-            
-            </View>
-          </View>
-      
-      </TouchableOpacity>
-    )} />*/}
+    </>)
+  }
+  return (
   
-  
+    <>
+    <View style={styles.view}> 
+       <Calendar/>
+      {UI}
+  </View>  
   </>
   
     
@@ -102,14 +86,26 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 10,
-    
     // top:100,
-    
+  },
+  tasks:{
+    fontSize:25,
+    fontWeight:"bold",
+    color:"#737373",
+    alignSelf:"center",
+    margin:20,
   },
   flat:{
     flex:1,
     
     
+  },
+  img:{
+    alignSelf:"center",
+    height:300,
+    width:300,
+    marginTop:50,
+
   },
   item: {
     // margin: 10,
