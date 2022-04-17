@@ -15,46 +15,61 @@ import { Fontisto } from "@expo/vector-icons";
 const { width } = Dimensions.get("screen");
 
 const TodoInputForm = ({ addTodoHandler }) => {
-  const [text, onChangeText] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [deadline, setDeadline] = useState("");
 
   const addTodo = () => {
     Keyboard.dismiss();
     addTodoHandler({
       key: new Date().toISOString(),
-      item: text,
+      title:title,
+      description:description,
+      deadline:deadline,
     });
-    Alert.alert("Add New Todo", `Todo Name : ${text}`);
-    addTodoHandler({});
+    Alert.alert("Add New Todo", `Todo Name : ${title}`);
+    setTitle("")
+    setDeadline("")
+    setDescription("")
   };
 
-  const LabelHandler = ({ placeholder, label, styling }) => {
-    return (
-      <>
-        <Text style={styles.text}>{label}</Text>
-        <TextInput
-          style={styling}
-          onChangeText={onChangeText}
-          value={text}
-          placeholder={placeholder}
-        />
-      </>
-    );
-  };
+  // const LabelHandler = ({ placeholder, label, styling }) => {
+  //   return (
+  //     <>
+  //       <Text style={styles.text}>{label}</Text>
+  //       <TextInput
+  //         style={styling}
+  //         setText={setText}
+  //         value={text}
+  //         placeholder={placeholder}
+  //       />
+  //     </>
+  //   );
+  // };
 
   return (
     <>
       <View style={styles.container}>
         <View style={styles.formGroup}>
-          <Text style={styles.label}>Enter Title</Text>
-          <TextInput style={styles.input} placeholder={"Enter Title"} />
+          <Text style={styles.label}> Title</Text>
+          <TextInput style={styles.input} value={title} onChangeText={(value)=>{
+              setTitle(value)
+          }} placeholder={"Enter Title"} />
         </View>
         <View style={styles.formGroup}>
-          <Text style={styles.label}>Enter Description</Text>
-          <TextInput style={styles.input} placeholder={"Enter Description"} />
+          <Text style={styles.label}> Description</Text>
+          <TextInput style={styles.input} value={description} onChangeText={(value)=>{
+              setDescription(value)
+          }}  placeholder={"Enter Description"} />
         </View>
         <View style={styles.formGroup}>
-          <Text style={styles.label}>Enter DeadLine</Text>
-          <TextInput style={styles.input} placeholder={"Enter DeadLine"} />
+          <Text style={styles.label}> DeadLine</Text>
+          <View style={styles.sectionStyle}>
+          <TextInput style={styles.input1} value={deadline} onChangeText={(value)=>{
+              setDeadline(value)
+          }}  placeholder={"Enter DeadLine"} />
+          <Fontisto name="date" style={styles.icon} size={24} color="black" />
+          </View>
         </View>
       </View>
       <Pressable onPress={addTodo} style={styles.btnContainer}>
@@ -69,6 +84,9 @@ export default TodoInputForm;
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,
+  },
+  label:{
+    marginHorizontal:20
   },
   input: {
     borderWidth: 1,
@@ -99,12 +117,12 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     width: width / 2,
-    alignSelf: "center",
+    //alignSelf: "center",
     backgroundColor: "#0074CC",
     borderRadius: 10,
     overflow: "hidden",
-    position: "absolute",
-    bottom: 135,
+    marginTop:90,
+    marginHorizontal:100,
     height: 40,
     justifyContent: "center",
   },

@@ -21,7 +21,7 @@ const { width } = Dimensions.get("screen");
     renderItem={({ item }) => (
      
         <View style={styles.item}>
-          <Text style={styles.text}>{item.item}</Text>
+          <Text >{item.title}</Text>
           
         </View>
       

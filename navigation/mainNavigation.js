@@ -30,12 +30,26 @@ const TodoListStack = () => {
     </Stack.Navigator>
   );
 };
+const CompleteTodoStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        ...defaultOption,
+      }}
+    >
+      <Stack.Screen name="CompleteList" component={Completetodoscreen} />
+      <Stack.Screen name="Detail" component={TodoDetailScreen} />
+      
+    </Stack.Navigator>
+  );
+};
 
 const TabBottomNav = () => {
   return (
     <Tab.Navigator
       screenOptions={{
         ...defaultOption,
+        tabBarHideOnKeyboard: true
       }}
     >
       <Tab.Screen
@@ -54,7 +68,7 @@ const TabBottomNav = () => {
       />
       <Tab.Screen
         name="Completetodo"
-        component={Completetodoscreen}
+        component={CompleteTodoStack}
         options={{
           tabBarIcon: () => <MaterialCommunityIcons name="playlist-check" size={24} color="black" />,
           
